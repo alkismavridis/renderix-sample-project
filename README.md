@@ -16,17 +16,17 @@ and then open in your browser: file:///PATH/TO/PROJECT/src/main/resources/main.h
 
 
 ### Compilation proccess:
-1. JS
+1. JS:
  Webpack will compile all ts files (starting from /src/main/ts/ui/index.ts).
  If a ts file does not get imported somewhere, it will not be included.
  If you wish, you can change the entry point in webpack/webpack.config.js
  One browser-friendly javascript file will be generated as out/bundle.js
 
-2. CSS
+2. CSS:
  All imported scss and css files will be combined in a single out/bundle.css file
  If a css / scss file is not imported by any ts file, it will not be included.
 
-3. Resources
+3. Resources:
  All files under /src/main/resources will be copied to /out/resources
 
 ## The architecture
