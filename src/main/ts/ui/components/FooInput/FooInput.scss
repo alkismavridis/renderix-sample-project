@@ -1,0 +1,15 @@
+.FooInput__root {
+    display: block;
+    margin: 10px 0;
+
+    input {
+        display: block;
+        padding:8px;
+        border-radius: 5px;
+    }
+
+    .FooInput__warning {
+        color: orange;
+        font-weight: bold;
+    }
+}
