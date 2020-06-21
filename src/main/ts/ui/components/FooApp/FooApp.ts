@@ -20,14 +20,12 @@ export default class FooApp implements RenderixComponent, AppUI {
     }
 
     render(props, children: ContentData) : ElementData {
-        const data:ElementData = ["div", {"/ref": this.rootElement, "class":'FooApp_root'}, [
+        return ["div", {"/ref": this.rootElement, "class":'FooApp_root'}, [
             ["h1", "Hello there!"],
             ["div", {"class": "FooApp__numDiv", "/ref":this.myDiv}, this.app.num],
             ["button", {".onclick": () => this.app.num = 0}, "Zero"],
             [FooInput, {"/assign": [this, "inputElement"], placeholder: "Hello", label: "Number:"}, null]
         ]];
-
-        return data;
     }
 
 

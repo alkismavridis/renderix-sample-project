@@ -1,16 +1,13 @@
 I created a sample rendering library.
 I wrapped a sample project around it as a proof of concept.
 
-
 It works using typescript, es6 modules and scss.
-
 
 ## The setup
 I used webpack.
-DONT PANIC, I had to do very little configuration.
-You can find it all in /webpack directory.
 
-to have fun:
+DONT PANIC, I had to do very little configuration.
+You can find it all in /webpack directory. To have fun, run:
 ```bash
 npm install
 npm run build
@@ -20,17 +17,17 @@ and then open in your browser: file:///PATH/TO/PROJECT/src/main/resources/main.h
 
 ### Compilation proccess:
 1. JS
-Webpack will compile all ts files (starting from /src/main/ts/ui/index.ts).
-If a ts file does not get imported somewhere, it will not be included.
-If you wish, you can change the entry point in webpack/webpack.config.js
-One browser-friendly javascript file will be generated as out/bundle.js
+ Webpack will compile all ts files (starting from /src/main/ts/ui/index.ts).
+ If a ts file does not get imported somewhere, it will not be included.
+ If you wish, you can change the entry point in webpack/webpack.config.js
+ One browser-friendly javascript file will be generated as out/bundle.js
 
 2. CSS
-All imported scss and css files will be combined in a single out/bundle.css file
-If a css / scss file is not imported by any ts file, it will not be included.
+ All imported scss and css files will be combined in a single out/bundle.css file
+ If a css / scss file is not imported by any ts file, it will not be included.
 
 3. Resources
-All files under /src/main/resources will be copied to /out/resources
+ All files under /src/main/resources will be copied to /out/resources
 
 ## The architecture
 I wanted to respect clean architecture principles.
@@ -155,8 +152,27 @@ The rules for those cases are exactly the same we saw in CONTENT.
 
 ## Renderix component
 Create a ts file and define a class that implements the RenderixComponent interface.
-Implement the method ```typescript
-render(props:any, children:ContentData) : ElementData
+There is only one method to be implemented: the render method. Example:
+
+```typescript
+import RenderixComponent from "../../renderix/RenderixComponent";
+import {ElementData, ContentData} from "../../renderix/ElementData";
+import ElementReference from "../../renderix/ElementReference";
+
+import FooInput from "../FooInput/FooInput";
+import "./FooComponent.scss";
+
+
+export default class FooComponent implements RenderixComponent {
+    private rootElement = new ElementReference();
+
+    render(props, children: ContentData) : ElementData {
+        return ["div", {"/ref": this.rootElement, "class":'FooComponent__root'}, [
+            ["h1", "Hello there!"],
+            [FooInput, {placeholder: "Hello", label: "World"}, null]
+        ]];
+    }
+}
 ```
 Return the content that you would like to be rendered, as in the examples above.
 
