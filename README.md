@@ -47,13 +47,14 @@ Core does not know about the UI specifics. It does not care if it lies in a brow
 You wouldn't have to change a single line of code here.
 Core uses interfaces to communicate with the UI, but does not care about the implementations.
 
-- UI: does the implements the UI-interfaces. Accepts update signals from the core and sends user events into the code.
-UI does not implement the business logic of the applcation, nor does it handles any state management other than DOM stuff.
-Here, renderix comes into play.
+- UI: implements the UI-interfaces. It accepts update-signals **from** the core and sends user events **into** the core.
+UI does not implement the business logic of the appilcation and does not handle any state management other than DOM-specific stuff.
+We rely to the core as the source-of-truth and do not use DOM as a state storage.
+UI uses renderix as its minimalistic rendering engine.
 
 
 
-## The Library
+## The Renderix Library
 Renderix does not use any syntax-extension like react, angular, vue or svelte. It relies solely on ts.
 Renderix uses structured data to create the components and give you util functions to updated them.
 Renderix uses reusable components like other frameworks. So, your UI would consist of many renderix components that may refer to each other.
