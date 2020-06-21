@@ -29,6 +29,8 @@ One browser-friendly javascript file will be generated as out/bundle.js
 All imported scss and css files will be combined in a single out/bundle.css file
 If a css / scss file is not imported by any ts file, it will not be included.
 
+3. Resources
+All files under /src/main/resources will be copied to /out/resources
 
 ## The architecture
 I wanted to respect clean architecture principles.
@@ -152,10 +154,12 @@ The rules for those cases are exactly the same we saw in CONTENT.
 
 ## Renderix component
 Create a ts file and define a class that implements the RenderixComponent interface.
-Implement the render(props:any, children:ContentData) : ElementData
+Implement the method ```typescript
+render(props:any, children:ContentData) : ElementData
+```
 Return the content that you would like to be rendered, as in the examples above.
 
-## Manipuating the dom using the util functions of ElementReference
+## Manipuate the dom using the util functions of ElementReference
 TODO
 
 
