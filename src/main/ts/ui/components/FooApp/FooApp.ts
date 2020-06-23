@@ -1,11 +1,11 @@
-import AppUI from "../../../core/inputs/ui/AppUI";
-import App from "../../../core/model/App";
+import AppUI from "core/inputs/ui/AppUI";
+import App from "core/model/App";
 
-import RenderixComponent from "../../renderix/RenderixComponent";
-import {ElementData, ContentData} from "../../renderix/ElementData";
-import ElementReference from "../../renderix/ElementReference";
+import RenderixComponent from "ui/renderix/RenderixComponent";
+import {ElementData, ContentData} from "ui/renderix/ElementData";
+import ElementReference from "ui/renderix/ElementReference";
 
-import FooInput from "../FooInput/FooInput";
+import FooInput from "ui/components/FooInput/FooInput";
 import "./FooApp.scss";
 
 
@@ -32,9 +32,10 @@ export default class FooApp implements RenderixComponent, AppUI {
     /// AppUI
     updateValue(value:number) {
         this.myDiv.html(value);
+        this.inputElement.setPlaceholder("It is now "+ value);
+    }
 
-        this.inputElement
-            .setPlaceholder("It is now "+ value)
-            .setWarningMessage(value > 5 && value < 15? "Between 5 and 15!" : null);
+    updateMessage(value:string) {
+        this.inputElement.setWarningMessage(value);
     }
 }

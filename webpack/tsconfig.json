@@ -1,5 +1,6 @@
 {
     "compilerOptions": {
+        "baseUrl": "../src/main/ts",
         "lib": ["es5", "es6", "dom"],
         "rootDir": "../src/main/ts",
         "outDir": "../dist/",

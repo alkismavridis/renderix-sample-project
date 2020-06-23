@@ -1,6 +1,6 @@
-import RenderixComponent from "../../renderix/RenderixComponent";
-import {ElementData, ContentData} from "../../renderix/ElementData";
-import ElementReference from "../../renderix/ElementReference";
+import RenderixComponent from "ui/renderix/RenderixComponent";
+import {ElementData, ContentData} from "ui/renderix/ElementData";
+import ElementReference from "ui/renderix/ElementReference";
 
 import "./FooInput.scss";
 
