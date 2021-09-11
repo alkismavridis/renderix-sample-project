@@ -1,19 +1,19 @@
-import AppUI from "core/inputs/ui/AppUI";
-import App from "core/model/App";
+import AppUI from "business_rules/ui/AppUI";
+import App from "business_rules/model/App";
 
-import RenderixComponent from "ui/renderix/RenderixComponent";
-import {ElementData, ContentData} from "ui/renderix/ElementData";
-import ElementReference from "ui/renderix/ElementReference";
+import RenderixComponent from "gui/renderix/RenderixComponent";
+import {ElementData, ContentData} from "gui/renderix/ElementData";
+import DomReference from "gui/renderix/DomReference";
 
-import FooInput from "ui/components/FooInput/FooInput";
+import FooInput from "gui/components/FooInput/FooInput";
 import "./FooApp.scss";
 
 
 export default class FooApp implements RenderixComponent, AppUI {
     private app:App;
     private inputElement: FooInput;
-    private myDiv = new ElementReference();
-    private rootElement = new ElementReference();
+    private myDiv = new DomReference();
+    private rootElement = new DomReference();
 
     constructor() {
         this.app = new App(this);
@@ -23,7 +23,9 @@ export default class FooApp implements RenderixComponent, AppUI {
         return ["div", {"/ref": this.rootElement, "class":'FooApp_root'}, [
             ["h1", "Hello there!"],
             ["div", {"class": "FooApp__numDiv", "/ref":this.myDiv}, this.app.num],
-            ["button", {".onclick": () => this.app.num = 0}, "Zero"],
+            ["button", {".onclick": () => this.app.num = this.app.num - 10}, "-10"],
+            ["button", {".onclick": () => this.app.num = 0}, "Reset"],
+            ["button", {".onclick": () => this.app.num = this.app.num + 10}, "+10"],
             [FooInput, {"/assign": [this, "inputElement"], placeholder: "Hello", label: "Number:"}, null]
         ]];
     }

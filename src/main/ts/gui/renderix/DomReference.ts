@@ -2,7 +2,16 @@ import {ContentData, ElementData} from "./ElementData";
 import RenderixUtils from "./RenderixUtils";
 import Renderix from "./Renderix";
 
-export default class ElementReference {
+/**
+    This class helps us manipulate the dom.
+    A DomReference can be associated with any Node: HTMLElements, SVGElement, Text Nodes, Comment Nodes etc.
+
+    We attach a DomReference to a node during rendering and then we manipulate the underlying element
+    using the methods in this class: we change its attributes or its content, we make it appear or dissapear, we replace it with an other element etc.
+
+    All setters return this for easy chaining.
+ */
+export default class DomReference {
     private _el: Node;
 
 
@@ -13,7 +22,7 @@ export default class ElementReference {
     }
 
     /** Changes the reference to a new element. No DOM operations are performed. */
-    setValue(newValue: Node) : ElementReference {
+    setValue(newValue: Node) : DomReference {
         this._el = newValue;
         return this;
     }
@@ -23,7 +32,7 @@ export default class ElementReference {
         Replaces the existing element with a new one in the DOM.
         If null or false is passed, the current element will be removed.
     */
-    replaceWith(data: ElementData) : ElementReference {
+    replaceWith(data: ElementData) : DomReference {
         const prevElement = this._el;
         if (!prevElement || !prevElement.parentElement) {
             return this;
@@ -37,8 +46,8 @@ export default class ElementReference {
     }
 
 
-    /// ELEMENT MANIPULATION
-    html(data: ContentData) : ElementReference {
+    /// MANIPULATING THE NODE
+    html(data: ContentData) : DomReference {
         if (this._el == null) return this;
 
         if (RenderixUtils.isTextNodeData(data)) {
@@ -64,7 +73,7 @@ export default class ElementReference {
         }
     }
 
-    attr(name:string, value: any) : ElementReference {
+    attr(name:string, value: any) : DomReference {
         if (this._el instanceof Element === false) return this;
         const element = this._el as Element;
 
@@ -80,7 +89,7 @@ export default class ElementReference {
         return this;
     }
 
-    cssClass(name: string, enable: boolean) : ElementReference {
+    cssClass(name: string, enable: boolean) : DomReference {
         if (this._el instanceof Element === false) return this;
         const element = this._el as Element;
 
@@ -90,7 +99,7 @@ export default class ElementReference {
         return this;
     }
 
-    style(name: string, value: string | undefined) : ElementReference {
+    style(name: string, value: string | undefined) : DomReference {
         if (this._el instanceof HTMLElement === false) return this;
         const element = this._el as HTMLElement;
 
@@ -100,7 +109,7 @@ export default class ElementReference {
     }
 
     /** Appends a child. */
-    append(data: ElementData) : ElementReference {
+    append(data: ElementData) : DomReference {
         if (!this.getValue()) return this;
 
         const createdElement = Renderix.makeElement(data);
@@ -110,22 +119,22 @@ export default class ElementReference {
     }
 
 
-    /// POSITION
-    goInside(parent: Node) : ElementReference {
+    /// POSITIONING THE NODE
+    goInside(parent: Node) : DomReference {
         if (!parent || !this._el) return this;
         parent.appendChild(this._el);
 
         return this;
     }
 
-    goBefore(sibling: Node) : ElementReference {
+    goBefore(sibling: Node) : DomReference {
         if (!this._el || !sibling || !sibling.parentElement) return this;
         sibling.parentElement.insertBefore(this._el, sibling);
 
         return this;
     }
 
-    remove() : ElementReference {
+    remove() : DomReference {
         if (!this.getValue() || !this._el.parentElement) return this;
 
         const newElement = document.createComment("");
@@ -143,10 +152,10 @@ export default class ElementReference {
 
         Parameters:
             show: should the item appear or dissapear?
-            createCallback: if the item needs to be created, tell me how (return ElementData)
-            updateCallback: if the item needs to be updated (in case it already exists in dom), tell me how.
+            createCallback: if the item needs to be created, tell me how to create it (return ElementData)
+            updateCallback: if the item needs to be updated (in case it already exists in dom), tell me how to update it
     */
-    update(show:boolean, createCallback:() => ElementData, updateCallback:(el:ElementReference) => void) : ElementReference {
+    update(show:boolean, createCallback:() => ElementData, updateCallback:(el:DomReference) => void) : DomReference {
         if (!show) {
             return this.remove();
         }

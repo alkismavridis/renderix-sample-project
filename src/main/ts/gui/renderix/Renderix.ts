@@ -14,7 +14,7 @@ export default class Renderix {
         return DomCreator.makeElement(data, Renderix._ctx);
     }
 
-    static registerEffect(name:string, callback: Function) {
+    static addEffect(name:string, callback: Function) {
         Renderix._ctx.addEffect(name, callback);
     }
 }

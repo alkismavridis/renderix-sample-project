@@ -17,7 +17,7 @@ and then open in your browser: file:///PATH/TO/PROJECT/src/main/resources/main.h
 
 ### Compilation proccess:
 1. JS:
- Webpack will compile all ts files (starting from /src/main/ts/ui/index.ts).
+ Webpack will compile all ts files (starting from /src/main/ts/gui/index.ts).
  If a ts file does not get imported somewhere, it will not be included.
  If you wish, you can change the entry point in webpack/webpack.config.js
  One browser-friendly javascript file will be generated as out/bundle.js
@@ -157,14 +157,14 @@ There is only one method to be implemented: the render method. Example:
 ```typescript
 import RenderixComponent from "../../renderix/RenderixComponent";
 import {ElementData, ContentData} from "../../renderix/ElementData";
-import ElementReference from "../../renderix/ElementReference";
+import DomReference from "../../renderix/DomReference";
 
 import FooInput from "../FooInput/FooInput";
 import "./FooComponent.scss";
 
 
 export default class FooComponent implements RenderixComponent {
-    private rootElement = new ElementReference();
+    private rootElement = new DomReference();
 
     render(props, children: ContentData) : ElementData {
         return ["div", {"/ref": this.rootElement, "class":'FooComponent__root'}, [
@@ -176,7 +176,7 @@ export default class FooComponent implements RenderixComponent {
 ```
 Return the content that you would like to be rendered, as in the examples above.
 
-## Manipuate the dom using the util functions of ElementReference
+## Manipuate the dom using the util functions of DomReference
 TODO
 
 

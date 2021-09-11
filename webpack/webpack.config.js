@@ -4,7 +4,7 @@ const CopyPlugin = require('copy-webpack-plugin');
 
 
 module.exports = {
-    entry: './src/main/ts/ui/index.ts',
+    entry: './src/main/ts/gui/index.ts',
     module: {
         rules: [
             {
@@ -34,5 +34,16 @@ module.exports = {
         new CopyPlugin({
             patterns: [{ from: './src/main/resources', to: './resources' }]
         })
-    ]
+    ],
+    devServer: {
+        contentBase: path.join(__dirname, '../out'),
+        compress: true,
+        port: 9000,
+
+        historyApiFallback: {
+        rewrites: [
+                { from: /./, to: '/resources/dev-master-template.html' }
+            ]
+        }
+    }
 };

@@ -1,6 +1,6 @@
-import RenderixComponent from "ui/renderix/RenderixComponent";
-import {ElementData, ContentData} from "ui/renderix/ElementData";
-import ElementReference from "ui/renderix/ElementReference";
+import RenderixComponent from "gui/renderix/RenderixComponent";
+import {ElementData, ContentData} from "gui/renderix/ElementData";
+import DomReference from "gui/renderix/DomReference";
 
 import "./FooInput.scss";
 
@@ -13,10 +13,11 @@ export class FooInputProps {
 
 
 export default class FooInput implements RenderixComponent {
-    private rootElement = new ElementReference();
-    private inpElement = new ElementReference();
-    private warningDiv = new ElementReference();
+    private rootElement = new DomReference();
+    private inpElement = new DomReference();
+    private warningDiv = new DomReference();
 
+    /// RENDERING
     render(props:FooInputProps, children:ContentData) : ElementData {
         return ["div", {"class": "FooInput__root", "/ref": this.rootElement}, [
             ["label", null, [
@@ -25,6 +26,7 @@ export default class FooInput implements RenderixComponent {
                     title: "You hover me!",
                     placeholder: props.placeholder,
                     "/ref": this.inpElement,
+                    "/onKeyUpPS": value => console.log(value)
                 }, null]
             ]],
             this.renderWarningMessage(props.warningMessage)
