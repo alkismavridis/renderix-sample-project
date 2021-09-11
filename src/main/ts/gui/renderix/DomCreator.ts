@@ -62,8 +62,7 @@ export default class DomCreator {
       throw new Error("Unknown component: " + data[0]);
     }
 
-    const componentUpdater = () => console.log("I rerender!");
-    const componentInstance = new ComponentClass(componentUpdater) as RenderixComponent;
+    const componentInstance = new ComponentClass() as RenderixComponent;
     const componentMarkup = DomCreator.getMarkupFromComponent(data, componentInstance, context);
     return DomCreator.makeElement(componentMarkup, context);
   }

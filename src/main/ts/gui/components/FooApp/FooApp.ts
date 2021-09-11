@@ -15,9 +15,8 @@ export default class FooApp implements RenderixComponent, AppUI {
     private myDiv = new DomReference();
     private rootElement = new DomReference();
 
-    constructor(updater: () => void) {
+    constructor() {
         this.app = new App(this);
-        updater();
     }
 
     render(props, children: ContentData) : ElementData {
