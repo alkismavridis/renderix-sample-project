@@ -1,5 +1,5 @@
 import {ContentData, RenderixNode} from "./RenderixNode";
-import RenderixUtils from "./RenderixUtils";
+import {isTextNodeData} from "../dom/DomUtils";
 import Renderix from "./Renderix";
 
 /**
@@ -50,7 +50,7 @@ export default class DomReference {
   html(data: ContentData): DomReference {
     if (this._el == null) return this;
 
-    if (RenderixUtils.isTextNodeData(data)) {
+    if (isTextNodeData(data)) {
       this.setTextContent(data + "");
       return this;
     }

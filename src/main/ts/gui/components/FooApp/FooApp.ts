@@ -1,9 +1,9 @@
 import App from "../../../business_rules/model/App";
 import AppUI from "../../../business_rules/ui/AppUI";
 import FooInput from "../FooInput/FooInput";
-import DomReference from "../../renderix/DomReference";
-import RenderixComponent from "../../renderix/RenderixComponent";
-import {RenderixNode} from "../../renderix/RenderixNode";
+import DomReference from "../../renderix/api/DomReference";
+import RenderixComponent from "../../renderix/api/RenderixComponent";
+import {RenderixNode} from "../../renderix/api/RenderixNode";
 import "./FooApp.scss";
 
 

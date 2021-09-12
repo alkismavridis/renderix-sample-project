@@ -1,5 +1,6 @@
 import {RenderixNode} from "./RenderixNode";
 import DomReference from "./DomReference";
+import Renderix from "./Renderix";
 
 
 export default class RenderixComponent<P> {
@@ -12,7 +13,6 @@ export default class RenderixComponent<P> {
     render(): RenderixNode { throw new Error("Renderix Components must override render()"); }
 
     update() {
-        if (!this.__root__) return;
-        this.__root__.replaceWith(this.render()); // TODO make real change detection
+        Renderix.update(this);
     }
 };
