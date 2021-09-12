@@ -1,5 +1,4 @@
 import RenderixUtils from "./RenderixUtils";
-import DomCreator from "./DomCreator";
 import DomReference from "./DomReference";
 
 export default class RenderixContext {

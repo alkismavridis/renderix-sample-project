@@ -1,7 +1,6 @@
-import RenderixComponent from "gui/renderix/RenderixComponent";
-import {ElementData, ContentData} from "gui/renderix/ElementData";
-import DomReference from "gui/renderix/DomReference";
-
+import RenderixComponent from "../../renderix/RenderixComponent";
+import {RenderixNode} from "../../renderix/RenderixNode";
+import DomReference from "../../renderix/DomReference";
 import "./FooInput.scss";
 
 
@@ -12,28 +11,28 @@ export class FooInputProps {
 }
 
 
-export default class FooInput implements RenderixComponent {
+export default class FooInput extends RenderixComponent<FooInputProps> {
     private rootElement = new DomReference();
     private inpElement = new DomReference();
     private warningDiv = new DomReference();
 
     /// RENDERING
-    render(props:FooInputProps, children:ContentData) : ElementData {
+    render(): RenderixNode {
         return ["div", {"class": "FooInput__root", "/ref": this.rootElement}, [
             ["label", null, [
-                props.label && ["span", {"class": "FooInput__label"}, props.label],
+                this.props.label && ["span", {"class": "FooInput__label"}, this.props.label],
                 ["input", {
                     title: "You hover me!",
-                    placeholder: props.placeholder,
+                    placeholder: this.props.placeholder,
                     "/ref": this.inpElement,
                     "/onKeyUpPS": value => console.log(value)
                 }, null]
             ]],
-            this.renderWarningMessage(props.warningMessage)
+            this.renderWarningMessage(this.props.warningMessage)
         ]];
     }
 
-    renderWarningMessage(message: string) : ElementData {
+    renderWarningMessage(message: string) : RenderixNode {
         return [message? "div" : "!", {"/ref": this.warningDiv, "class":"FooInput__warning"}, message];
     }
 

@@ -1,25 +1,29 @@
-import AppUI from "business_rules/ui/AppUI";
-import App from "business_rules/model/App";
-
-import RenderixComponent from "gui/renderix/RenderixComponent";
-import {ElementData, ContentData} from "gui/renderix/ElementData";
-import DomReference from "gui/renderix/DomReference";
-
-import FooInput from "gui/components/FooInput/FooInput";
+import App from "../../../business_rules/model/App";
+import AppUI from "../../../business_rules/ui/AppUI";
+import FooInput from "../FooInput/FooInput";
+import DomReference from "../../renderix/DomReference";
+import RenderixComponent from "../../renderix/RenderixComponent";
+import {RenderixNode} from "../../renderix/RenderixNode";
 import "./FooApp.scss";
 
 
-export default class FooApp implements RenderixComponent, AppUI {
-    private app:App;
+export default class FooApp extends RenderixComponent<void> implements AppUI {
+    private app: App;
     private inputElement: FooInput;
     private myDiv = new DomReference();
     private rootElement = new DomReference();
 
     constructor() {
+        super();
         this.app = new App(this);
     }
 
-    render(props, children: ContentData) : ElementData {
+    fooLifecycle(markup: Node, updater: () => void) {
+        console.log(markup);
+        updater();
+    }
+
+    render() : RenderixNode {
         return ["div", {"/ref": this.rootElement, "class":'FooApp_root'}, [
             ["h1", "Hello there!"],
             ["div", {"class": "FooApp__numDiv", "/ref":this.myDiv}, this.app.num],

@@ -1,10 +1,10 @@
-import AppUI from "business_rules/ui/AppUI";
+import AppUI from "../ui/AppUI";
 
 export default class App {
     private _num = 0;
     private _message = "";
 
-    constructor(private appUI:AppUI) {
+    constructor(private appUI: AppUI) {
         setInterval(() => this.num = this._num + 1, 700);
     }
 

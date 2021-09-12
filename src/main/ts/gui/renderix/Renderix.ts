@@ -1,6 +1,6 @@
 import RenderixContext from "./RenderixContext";
 import DomCreator from "./DomCreator";
-import {ContentData, ElementData} from "./ElementData";
+import {ContentData, RenderixNode} from "./RenderixNode";
 
 
 export default class Renderix {
@@ -10,7 +10,7 @@ export default class Renderix {
         DomCreator.addContentTo(host, data, Renderix._ctx);
     }
 
-    static makeElement(data:ElementData) : Node {
+    static makeElement(data: RenderixNode) : Node {
         return DomCreator.makeElement(data, Renderix._ctx);
     }
 
