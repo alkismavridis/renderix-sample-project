@@ -16,6 +16,8 @@ export default class DomReference {
 
 
   /// ELEMENT MANAGEMENT
+  get raw() { return this._el; }
+
   getValue(): Node {
     if (this._el instanceof Comment) return null;
     return this._el;

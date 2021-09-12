@@ -1,4 +1,5 @@
 import DomReference from "./api/DomReference";
+import RenderixComponent from "./api/RenderixComponent";
 
 export default class EffectRepository {
     private _effects: any = {
@@ -32,8 +33,13 @@ export default class EffectRepository {
         onKeyUpPS: (el:any, callback) => this.addValueListener(el, callback, "onkeyup", true, true),
     };
 
-    get(name:string) : Function {
-        return this._effects[name];
+    apply(target: Node | RenderixComponent<any>, key: string, value: any): void {
+        const specialFunc = this._effects[name];
+        if (!specialFunc) {
+            throw new Error("EffectRepository - Unknown effect: /" + name);
+        }
+
+        specialFunc(target, value);
     }
 
     add(name:string, callback: Function) {

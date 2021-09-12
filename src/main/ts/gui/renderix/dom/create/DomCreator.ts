@@ -102,11 +102,11 @@ export default class DomCreator {
 
       //It is a special effect
       else if (firstKeyChar == "/") {
-        this.applyEffect(el, key.substring(1), value);
+        this.effectRepo.apply(el, key.substring(1), value);
       }
 
       //it is an html attribute
-      else if (isElement && value && value !== false && value !== undefined) {
+      else if (isElement && value !== false && value != null) {
         (el as Element).setAttribute(key, value);
       }
     }
@@ -121,18 +121,9 @@ export default class DomCreator {
       const value = comp.props[key];
 
       if (firstKeyChar == "/") {
-        this.applyEffect(comp, key.substring(1), value);
+        this.effectRepo.apply(comp, key.substring(1), value);
       }
     }
-  }
-
-  private applyEffect(el: Node | RenderixComponent<any>, key: string, value: any): void {
-    const specialFunc = this.effectRepo.get(key);
-    if (!specialFunc) {
-      throw new Error("DomCreator. Unknown effect: /" + key);
-    }
-
-    specialFunc(el, value);
   }
 }
 

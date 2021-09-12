@@ -1,5 +1,5 @@
 import App from "../../../business_rules/model/App";
-import AppUI from "../../../business_rules/ui/AppUI";
+import AppView from "../../../business_rules/ui/AppView";
 import FooInput from "../FooInput/FooInput";
 import DomReference from "../../renderix/api/DomReference";
 import RenderixComponent from "../../renderix/api/RenderixComponent";
@@ -7,26 +7,20 @@ import {RenderixNode} from "../../renderix/api/RenderixNode";
 import "./FooApp.scss";
 
 
-export default class FooApp extends RenderixComponent<void> implements AppUI {
+export default class FooApp extends RenderixComponent<void> implements AppView {
     private app: App;
     private inputElement: FooInput;
     private myDiv = new DomReference();
     private rootElement = new DomReference();
 
-    constructor() {
-        super();
+    onInit() {
         this.app = new App(this);
-    }
-
-    fooLifecycle(markup: Node, updater: () => void) {
-        console.log(markup);
-        updater();
     }
 
     render() : RenderixNode {
         return ["div", {"/ref": this.rootElement, "class":'FooApp_root'}, [
             ["h1", "Hello there!"],
-            ["div", {"class": "FooApp__numDiv", "/ref":this.myDiv}, this.app.num],
+            ["div", {"class": "FooApp__numDiv", "/ref": this.myDiv}, this.app.num],
             ["button", {".onclick": () => this.app.num = this.app.num - 10}, "-10"],
             ["button", {".onclick": () => this.app.num = 0}, "Reset"],
             ["button", {".onclick": () => this.app.num = this.app.num + 10}, "+10"],

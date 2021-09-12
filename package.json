@@ -6,7 +6,7 @@
   "scripts": {
     "build": "webpack --config ./webpack/webpack.config.js --mode development",
     "dev": "webpack-dev-server --config ./webpack/webpack.config.js --mode development",
-    "test": "jest"
+    "test": "jest --config webpack/jest.config.js"
   },
   "author": "",
   "license": "ISC",
